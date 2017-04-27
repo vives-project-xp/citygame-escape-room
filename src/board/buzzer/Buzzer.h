@@ -1,0 +1,6 @@
+class Buzzer{
+    
+    public:
+        Buzzer();
+
+};
