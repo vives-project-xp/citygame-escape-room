@@ -3,3 +3,5 @@ mbed-settings.pyc
 mbed-os/
 .mbed
 Simple-LoRaWAN
+MbedJSONValue/
+LogIt/
