@@ -76,7 +76,6 @@ void Game::toLcd(){
     if(isComplete()) this->board->lcd->setMessageScreen("No missions available");
     else if(!board->gps->fix) this->board->lcd->setMessageScreen("Waiting for GPS...");
     else{
-        this->board->lcd->setMissionScreen(currentMission->getDescription(),(int)currentMission->getDistanceToTarget(),(int)currentMission->getRadius());  
-        this->board->leds->reactToDistance((int)currentMission->getDistanceToTarget(), (int)currentMission->getRadius());
+        this->currentMission->toLcd();
     }    
 }

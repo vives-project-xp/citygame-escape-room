@@ -10,8 +10,8 @@ class Lcd : public DisplayX{
         PwmOut* backlight;
     public:
         Lcd();
-        void setEndScreen();
-        void setStartScreen();
-        void setMessageScreen(std::string message);
-        void setMissionScreen(std::string description, int distance, int radius);
+        virtual void setEndScreen();
+        virtual void setStartScreen();
+        virtual void setMessageScreen(std::string message);
+        virtual void setMissionScreen(std::string description, int distance, int radius);
 };

@@ -6,16 +6,15 @@
 class GameHandler{
     private:
         static const float LCD_INTERVAL = 3.0;
-
+        
         Board * board;
         bool gameRunning;
-        Thread lcd_thread;
-
+        Ticker lcd_ticker;
+        
     public:
         Game * game;
-
+        
     public:
         GameHandler(char * buffer, Board * board);
-        void run();
-        void toLcd();
+        void run();    
 };

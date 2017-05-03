@@ -2,7 +2,6 @@
 
 #include <string>
 #include <vector>
-#include "Location.h"
 #include "Board.h"
 
 class Mission{
@@ -10,27 +9,25 @@ class Mission{
        std::string name;
        std::string description;
        int id;
-       std::vector<Location *> locations;
+       int typeId;
+    
+    protected:
        Board * board;
         
         
     public:
-        Mission(std::string name, int id, std::string description);
-        void debug(Serial * serial);
+        Mission(std::string name, int id, std::string description, int typeId);
+        virtual void debug(Serial * serial)=0;
+        virtual void toLcd()=0;
         
     public: //Getters
         std::string getName();
         std::string getDescription();
-        double getLatitude();
-        double getLongitude();
-        double getRadius();
         int getId();
-        double getDistanceToTarget();
-        bool isComplete();
-        int getIndexOfClosestArea();
+        int getTypeId();
+        virtual bool isComplete()=0;
         
     public: //Setters
-        void addTargetLocation(Location* location);
         void attachBoard(Board* board);
 
 };

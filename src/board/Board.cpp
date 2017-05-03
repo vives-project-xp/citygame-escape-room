@@ -8,6 +8,7 @@ Board::Board(){
    gps = new Gps(&gps_serial); 
    leds = new Leds(&i2c);
    lcd = new Lcd();
+   keys = new Keys();
    
    //----------------- TESTZONE ---------------
    

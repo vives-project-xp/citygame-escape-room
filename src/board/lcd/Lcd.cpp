@@ -30,14 +30,14 @@ void Lcd::setStartScreen(){
 
 void Lcd::setMissionScreen(std::string description, int distance, int radius){
     lcd->cls();
-    lcd->printf("%s", description);
+    lcd->printf("%s", description.c_str());
     lcd->locate(0,3);
     lcd->printf("Dist: %im Rad:%im", distance, radius);
 }
 
 void Lcd::setMessageScreen(std::string message){
     lcd->cls();
-    lcd->printf("%s", message);
+    lcd->printf("%s", message.c_str());
 }
 
 
