@@ -1,9 +1,10 @@
 #include "GameHandler.h"
 #include "GameCreator.h"
 
-GameHandler::GameHandler(char * buffer, Board * board){
+GameHandler::GameHandler(char * buffer, Board * board, Log::LoggerInterface * logger){
+    set_logger(logger);
     this->board = board;
-    game = GameCreator::createInstance(buffer);
+    game = GameCreator::createInstance(buffer, logger);
     game->attachBoard(this->board);
     game->loadNextMission();
     gameRunning = true;

@@ -1,24 +1,25 @@
 #include "Game.h"
 #include "mbed.h"
 
-Game::Game(){
+Game::Game(Log::LoggerInterface * logger) {
+    set_logger(logger);
     this->linkedList = new LinkedList();
     currentMission = NULL;
     complete = false;
 }
-        
+
 void Game::run(){
    //If mission complete, request new mission
     if( currentMission->isComplete() ) loadNextMission();
 }
-        
+
 void Game::debug(Serial * serial){
-    if(currentMission == NULL) serial->printf("No current mission...\r\n");
+    if(currentMission == NULL) logger->warning("No current mission");
     else{
-       serial->printf("Mission Name: %s\n", currentMission->getName().c_str());
-       serial->printf("Mission ID: %i\n", currentMission->getId());
-       serial->printf("Mission Description: %s\n", currentMission->getDescription().c_str());
-       currentMission->debug(serial);
+      logger->debug("Mission Name: %s\n", currentMission->getName().c_str());
+      logger->debug("Mission ID: %i\n", currentMission->getId());
+      logger->debug("Mission Description: %s\n", currentMission->getDescription().c_str());
+      currentMission->debug(serial);
     }
 }
 
@@ -27,7 +28,7 @@ void Game::loadNextMission(){
         this->currentNode = this->linkedList->getFirstNode();
         this->currentMission = currentNode->getData();
         this->currentMission->attachBoard(board);
-    } 
+    }
     else{
         this->currentNode = this->currentNode->getNextNode();
         if(this->currentNode == NULL){
@@ -40,9 +41,9 @@ void Game::loadNextMission(){
             this->currentMission = this->currentNode->getData();
             this->currentMission->attachBoard(board);
         }
-        
+
     }
-    
+
 }
 
 
@@ -72,10 +73,10 @@ bool Game::isComplete(){
 }
 
 void Game::toLcd(){
-    printf("SENDING VALUES TO LCD \r\n");
+    logger->debug("Sending values to LCD");
     if(isComplete()) this->board->lcd->setMessageScreen("No missions available");
     else if(!board->gps->fix) this->board->lcd->setMessageScreen("Waiting for GPS...");
     else{
         this->currentMission->toLcd();
-    }    
+    }
 }

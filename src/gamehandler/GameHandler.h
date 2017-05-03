@@ -2,8 +2,9 @@
 
 #include "Board.h"
 #include "Game.h"
+#include "logable.h"
 
-class GameHandler{
+class GameHandler : public LogItNow::Logable {
     private:
         static const float LCD_INTERVAL = 3.0;
 
@@ -15,7 +16,7 @@ class GameHandler{
         Game * game;
 
     public:
-        GameHandler(char * buffer, Board * board);
+        GameHandler(char * buffer, Board * board, Log::LoggerInterface * logger = 0);
         void run();
         void toLcd();
 };

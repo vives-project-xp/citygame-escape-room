@@ -6,6 +6,7 @@
 #include "Logger.h"
 #include "StringReader.h"
 #include "GameHandler.h"
+#include "serial_logger.h"
 
 using namespace SimpleLoRaWAN;
 
@@ -15,6 +16,7 @@ Thread send_thread;
 Thread * setupGameThread;
 DigitalOut fix_led(LED4);
 Logger logger(&pc);
+Log::LoggerInterface * serialLogger;
 
 Node* node;
 Board* board;
@@ -53,7 +55,7 @@ void setup_game_handler(void) {
   reader->read(buffer, sizeof(buffer));
   pc.printf("\n Content: --------------------------- \n %s \n ------------------------------------------- \n", buffer);
 
-  gameHandler = new GameHandler(buffer, board);
+  gameHandler = new GameHandler(buffer, board, serialLogger);
 }
 
 void createSetupThread(void) {
@@ -68,7 +70,8 @@ void createSetupThread(void) {
 void init()
 {
     pc.baud(115200);
-    pc.printf("\n\nInitializing Vives CityGame\n");
+    serialLogger = new LogItNow::SerialLogger(&pc);
+    serialLogger->info("Initializing Vives CityGame");
 
     node = new ABP::Node(devAddr, nwksKey, appKey);
     node->disableLinkCheck();

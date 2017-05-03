@@ -5,9 +5,9 @@
 #include "Location.h"
 #include <string>
 
-Game * GameCreator::createInstance(char * buffer){
+Game * GameCreator::createInstance(char * buffer, Log::LoggerInterface * logger){
 
-    Game * game = new Game();
+    Game * game = new Game(logger);
 
     MbedJSONValue json;
     parse(json, buffer);
