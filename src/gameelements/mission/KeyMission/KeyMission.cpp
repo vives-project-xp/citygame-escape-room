@@ -1,10 +1,10 @@
 #include "KeyMission.h"
 
-KeyMission::KeyMission(std::string name, int id, std::string description, int typeId): Mission(name, id, description, typeId){
-}    
+KeyMission::KeyMission(std::string name, int id, std::string description, int typeId, Log::LoggerInterface * logger): Mission(name, id, description, typeId, logger){
+}
 
-void KeyMission::debug(Serial * serial){
-    serial->printf("Key turned: %s\n", board->keys->isKeyTurned() ? "YES" : "NO");
+void KeyMission::debug(){
+    logger->debug("Key turned: %s", board->keys->isKeyTurned() ? "YES" : "NO");
 }
 
 bool KeyMission::isComplete(){
@@ -13,6 +13,5 @@ bool KeyMission::isComplete(){
 }
 
 void KeyMission::toLcd(){
-    this->board->lcd->setMessageScreen(getDescription());  
+    this->board->lcd->setMessageScreen(getDescription());
 }
-    

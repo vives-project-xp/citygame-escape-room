@@ -4,29 +4,29 @@
 #include <vector>
 #include "Board.h"
 
-class Mission{
+class Mission : public LogItNow::Logable{
     private:
        std::string name;
        std::string description;
        int id;
        int typeId;
-    
+
     protected:
        Board * board;
-        
-        
+
+
     public:
-        Mission(std::string name, int id, std::string description, int typeId);
-        virtual void debug(Serial * serial)=0;
+        Mission(std::string name, int id, std::string description, int typeId, Log::LoggerInterface * logger);
+        virtual void debug()=0;
         virtual void toLcd()=0;
-        
+
     public: //Getters
         std::string getName();
         std::string getDescription();
         int getId();
         int getTypeId();
         virtual bool isComplete()=0;
-        
+
     public: //Setters
         void attachBoard(Board* board);
 

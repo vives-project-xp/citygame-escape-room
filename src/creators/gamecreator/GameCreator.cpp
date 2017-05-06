@@ -20,7 +20,7 @@ Game * GameCreator::createInstance(char * buffer, Log::LoggerInterface * logger)
     );
 
     for(int i=0; i < json["missions"].size(); i++){
-        game->addMission( MissionCreator::createInstance(json["missions"][i]) );
+        game->addMission( MissionCreator::createInstance(json["missions"][i], logger) );
     }
 
     return game;

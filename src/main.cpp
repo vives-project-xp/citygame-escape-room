@@ -3,7 +3,6 @@
 #include "Board.h"
 #include "settings.h"
 #include "Packet.h"
-#include "Logger.h"
 #include "StringReader.h"
 #include "GameHandler.h"
 #include "serial_logger.h"
@@ -15,7 +14,6 @@ Thread gps_thread;
 Thread send_thread;
 Thread * setupGameThread;
 DigitalOut fix_led(LED4);
-Logger logger(&pc);
 Log::LoggerInterface * serialLogger;
 
 Node* node;
@@ -30,8 +28,8 @@ char buffer[2048];
 void show_gps_info()
 {
   while(true){
-    logger.gps(board->gps);
-    logger.game(gameHandler->game);
+    board->gps->debug();
+    gameHandler->game->debug();
     Thread::wait(GPS_UPDATE_TIME*1000);
   }
 }
@@ -41,7 +39,6 @@ void send_info()
   while(true){
     if(board->gps->fix){
         uint8_t* packet = Packet::build(board->gps, gameHandler->game);
-        logger.packet(packet);
         node->send(packet, 9);
     }
     Thread::wait(LORAWAN_INTERVAL*1000);
@@ -49,8 +46,7 @@ void send_info()
 }
 
 void setup_game_handler(void) {
-  //ConfigReader * reader = new StringReader("{\"name\":\"LocationGame\",\"box_description\":\"Go to locations.\",\"full_description\":\"Whilst bringing the rebels to the imperial prison, your stardestroyer got shot. Retrieve the lost communicator parts to contact an extraction team\",\"length\":3000,\"time\":120,\"missions\":[{\"id\":1,\"name\":\"GotoLocation\",\"description\":\"The first part is at the entrance of Kinepolis\",\"locations\":[{\"lat\":51.223142,\"long\":2.896536,\"radius\":20.3}]},{\"id\":2,\"name\":\"GotoLocation\",\"description\":\"The next one is at the Spar\",\"locations\":[{\"lat\":51.222359,\"long\":2.892109,\"radius\":15.5}]}]}");
-  ConfigReader * reader = new StringReader("{\"name\":\"LocationGame\",\"box_description\":\"Go to locations.\",\"full_description\":\"Whilst bringing the rebels to the imperial prison, your stardestroyer got shot. Retrieve the lost communicator parts to contact an extraction team\",\"length\":3000,\"time\":120,\"missions\":[{\"id\":1,\"name\":\"GotoLocation\",\"description\":\"The first part is at the entrance of Kinepolis\",\"typeid\":10,\"locations\":[{\"lat\":51.223142,\"long\":2.896536,\"radius\":1234.5}]},{\"id\":2,\"name\":\"GotoLocation\",\"description\":\"The next one is at the Spar\",\"typeid\":10,\"locations\":[{\"lat\":51.222359,\"long\":2.892109,\"radius\":1234.5}]},{\"id\":3,\"name\":\"FindAKey\",\"description\":\"There is a key on the light pole\",\"typeid\":20}]}");
+  ConfigReader * reader = new StringReader("{\"name\":\"LocationGame\",\"box_description\":\"Go to locations.\",\"full_description\":\"Whilst bringing the rebels to the imperial prison, your stardestroyer got shot. Retrieve the lost communicator parts to contact an extraction team\",\"length\":3000,\"time\":120,\"missions\":[{\"id\":1,\"name\":\"GotoLocation\",\"description\":\"The first part is at the entrance of Kinepolis\",\"typeid\":10,\"locations\":[{\"lat\":51.223142,\"long\":2.896536,\"radius\":12.5}]},{\"id\":2,\"name\":\"GotoLocation\",\"description\":\"The next one is at the Spar\",\"typeid\":10,\"locations\":[{\"lat\":51.222359,\"long\":2.892109,\"radius\":12.5}]},{\"id\":3,\"name\":\"FindAKey\",\"description\":\"There is a key on the light pole\",\"typeid\":20}]}");
 
   reader->read(buffer, sizeof(buffer));
   pc.printf("\n Content: --------------------------- \n %s \n ------------------------------------------- \n", buffer);
@@ -77,7 +73,7 @@ void init()
     node->disableLinkCheck();
     node->setSpreadFactor(DR_SF7);
 
-    board = new Board();
+    board = new Board(serialLogger);
 
     createSetupThread();
 
@@ -91,7 +87,6 @@ int main(void)
     wait(1.0);
 
     while(true){
-      wait(1.0);
         node->process();
         board->gps->run();
         fix_led = !board->gps->fix;

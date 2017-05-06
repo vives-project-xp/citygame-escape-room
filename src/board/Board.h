@@ -16,8 +16,8 @@ class Board{
         Keys * keys;
         Gps * gps;
         Buzzer * buzzer;
-    
+
     public:
-        Board();
+        Board(Log::LoggerInterface * logger = 0);
 
 };

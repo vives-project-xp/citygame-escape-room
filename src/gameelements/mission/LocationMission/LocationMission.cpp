@@ -1,7 +1,7 @@
 #include "LocationMission.h"
 #include <cfloat>
 
-LocationMission::LocationMission(std::string name, int id, std::string description, int typeId): Mission(name, id, description, typeId){
+LocationMission::LocationMission(std::string name, int id, std::string description, int typeId, Log::LoggerInterface * logger): Mission(name, id, description, typeId, logger){
 }
 
 int LocationMission::getIndexOfClosestArea(){
@@ -17,10 +17,10 @@ int LocationMission::getIndexOfClosestArea(){
     return index;
 }
 
-void LocationMission::debug(Serial * serial){
-    serial->printf("Target location: %5.6f , %5.6f\n", getLatitude(), getLongitude());
-    serial->printf("Radius: %f \n", getRadius());
-    if(board->gps->fix) serial->printf("Distance to target: %f \n", getDistanceToTarget());
+void LocationMission::debug(){
+    logger->debug("Target location: %5.6f , %5.6f", getLatitude(), getLongitude());
+    logger->debug("Radius: %f ", getRadius());
+    if(board->gps->fix) logger->debug("Distance to target: %f ", getDistanceToTarget());
 }
 
 bool LocationMission::isComplete(){

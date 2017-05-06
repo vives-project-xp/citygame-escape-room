@@ -13,13 +13,13 @@ void Game::run(){
     if( currentMission->isComplete() ) loadNextMission();
 }
 
-void Game::debug(Serial * serial){
+void Game::debug(){
     if(currentMission == NULL) logger->warning("No current mission");
     else{
-      logger->debug("Mission Name: %s\n", currentMission->getName().c_str());
-      logger->debug("Mission ID: %i\n", currentMission->getId());
-      logger->debug("Mission Description: %s\n", currentMission->getDescription().c_str());
-      currentMission->debug(serial);
+      logger->debug("Mission Name: %s", currentMission->getName().c_str());
+      logger->debug("Mission ID: %i", currentMission->getId());
+      logger->debug("Mission Description: %s", currentMission->getDescription().c_str());
+      currentMission->debug();
     }
 }
 
@@ -73,7 +73,6 @@ bool Game::isComplete(){
 }
 
 void Game::toLcd(){
-    logger->debug("Sending values to LCD");
     if(isComplete()) this->board->lcd->setMessageScreen("No missions available");
     else if(!board->gps->fix) this->board->lcd->setMessageScreen("Waiting for GPS...");
     else{

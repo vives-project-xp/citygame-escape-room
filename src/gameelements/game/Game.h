@@ -27,7 +27,7 @@ class Game : public LogItNow::Logable {
 
     public:
         void run();
-        void debug(Serial * serial);
+        void debug();
         void loadNextMission();
         void toLcd();
 
