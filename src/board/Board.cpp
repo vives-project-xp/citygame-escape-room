@@ -10,12 +10,7 @@ Board::Board(Log::LoggerInterface * logger){
    lcd = new Lcd();
    keys = new Keys();
 
-   //----------------- TESTZONE ---------------
-
-   leds->setGlobalBrightness(0.2);
-   leds->setLed(0,1,0,0);
-   leds->setLed(1,0,1,0);
-   leds->setLed(2,0,0,1);
-   leds->setLed(3,1,1,0);
-   leds->setLed(4,0,1,1);
+   leds->setStartState();
+   lcd->setStartScreen();
+   
 }

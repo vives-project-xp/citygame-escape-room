@@ -6,7 +6,6 @@ Lcd::Lcd(){
    backlight->period(0.001f);
    backlight->write(0.75f);
    lcd = new TextLCD(PTC5, PTC7, PTC0, PTC9, PTC8, PTC1, TextLCD::LCD20x4);
-   setStartScreen();
 }
 
 void Lcd::setEndScreen(){
@@ -39,7 +38,3 @@ void Lcd::setMessageScreen(std::string message){
     lcd->cls();
     lcd->printf("%s", message.c_str());
 }
-
-
- 
-

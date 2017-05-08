@@ -19,7 +19,7 @@ void GameHandler::run(){
 
 void GameHandler::toLcd(){
     while(true){
-      game->toLcd();
-      Thread::wait(LCD_INTERVAL*1000);
+        Thread::wait(LCD_INTERVAL*1000);
+        game->toLcd();
     }
 }
