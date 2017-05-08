@@ -6,6 +6,8 @@
 #include "Keys.h"
 #include "Gps.h"
 #include "Buzzer.h"
+#include "NumberPad.h"
+
 
 class Board{
 
@@ -16,8 +18,11 @@ class Board{
         Keys * keys;
         Gps * gps;
         Buzzer * buzzer;
+        NumberPad * numberPad;
 
     public:
         Board(Log::LoggerInterface * logger = 0);
+        uint32_t buttonEvent(uint32_t index);
+
 
 };
