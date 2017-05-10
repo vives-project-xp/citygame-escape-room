@@ -22,6 +22,6 @@ Board::Board(Log::LoggerInterface * logger){
 
 uint32_t Board::buttonEvent(uint32_t index){
     printf("Pushed button: %c",NumberPad::KEYS[index]);
-    buzzer->buttonBeep();
+    buzzer->keypadBeep(NumberPad::KEYS[index]);
     return 0;
 }
