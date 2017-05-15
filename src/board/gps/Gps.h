@@ -19,6 +19,12 @@ class Gps : public Adafruit_GPS, public LogItNow::Logable
     double longitude_in_degrees();
     double distance_to_target(double latitudeTarget, double longitudeTarget);
 
+    int getHours();
+    int getMinutes();
+    int getSeconds();
+
     protected:
     static double convertDegMinToDecDeg (float degMin);
+
+
 };

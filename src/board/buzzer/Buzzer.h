@@ -11,5 +11,6 @@ class Buzzer{
         void playFreq(float frequency, float duration, float volume);
         void buttonBeep();
         void startupSound();
+        void completeSound();
         void keypadBeep(char button);
 };

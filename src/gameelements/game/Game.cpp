@@ -73,6 +73,8 @@ bool Game::isComplete(){
 }
 
 void Game::toLcd(){
+    this->board->lcd->setTime(this->board->gps->getHours() + 2, this->board->gps->getMinutes(), this->board->gps->getSeconds());
+    this->board->lcd->setStatusGps(this->board->gps->fix);
     if(isComplete()) this->board->lcd->setMessageScreen("No missions available");
     else if(!board->gps->fix) this->board->lcd->setMessageScreen("Waiting for GPS...");
     else{

@@ -38,3 +38,15 @@ void Lcd::setMessageScreen(std::string message){
     lcd->cls();
     lcd->printf("%s", message.c_str());
 }
+
+void Lcd::setTime(int hours, int minutes, int seconds){
+    //No implementation
+}
+
+void Lcd::eventHandler(char key){
+    //No implementation
+}
+
+void Lcd::setStatusGps(int gpsFix){
+    //No implementation
+}

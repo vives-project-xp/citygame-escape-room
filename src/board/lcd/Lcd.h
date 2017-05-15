@@ -14,4 +14,7 @@ class Lcd : public DisplayX{
         virtual void setStartScreen();
         virtual void setMessageScreen(std::string message);
         virtual void setMissionScreen(std::string description, int distance, int radius);
+        virtual void setTime(int hours, int minutes, int seconds);
+        virtual void eventHandler(char key);
+        virtual void setStatusGps(int gpsFix);
 };

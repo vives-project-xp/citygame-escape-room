@@ -79,3 +79,13 @@ double Gps::distance_to_target(double latitudeTarget, double longitudeTarget)
     double longVar = metersPerDegLong * (longitude_in_degrees() - longitudeTarget);
     return sqrt(pow(latVar,2.0) + pow(longVar,2.0));
 }
+
+int Gps::getHours(){
+    return hour;
+}
+int Gps::getMinutes(){
+    return minute;
+}
+int Gps::getSeconds(){
+    return seconds;
+}

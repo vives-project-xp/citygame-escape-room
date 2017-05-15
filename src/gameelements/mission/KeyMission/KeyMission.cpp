@@ -8,7 +8,10 @@ void KeyMission::debug(){
 }
 
 bool KeyMission::isComplete(){
-    if(board->keys->isKeyTurned()) return true;
+    if(board->keys->isKeyTurned()){
+        board->buzzer->completeSound();
+        return true;
+    }
     else return false;
 }
 
