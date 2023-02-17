@@ -4,7 +4,7 @@
 #include <vector>
 #include "Board.h"
 
-class Mission : public LogItNow::Logable{
+class Mission {
     private:
        std::string name;
        std::string description;
@@ -16,7 +16,7 @@ class Mission : public LogItNow::Logable{
 
 
     public:
-        Mission(std::string name, int id, std::string description, int typeId, Log::LoggerInterface * logger);
+        Mission(std::string name, int id, std::string description, int typeId);
         virtual void debug()=0;
         virtual void toLcd()=0;
 

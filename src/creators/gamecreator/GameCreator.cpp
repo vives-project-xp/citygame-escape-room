@@ -5,9 +5,9 @@
 #include "Location.h"
 #include <string>
 
-Game * GameCreator::createInstance(char * buffer, Log::LoggerInterface * logger){
+Game * GameCreator::createInstance(char * buffer){
 
-    Game * game = new Game(logger);
+    Game * game = new Game();
 
     MbedJSONValue json;
     parse(json, buffer);
@@ -20,7 +20,7 @@ Game * GameCreator::createInstance(char * buffer, Log::LoggerInterface * logger)
     );
 
     for(int i=0; i < json["missions"].size(); i++){
-        game->addMission( MissionCreator::createInstance(json["missions"][i], logger) );
+        game->addMission( MissionCreator::createInstance(json["missions"][i]) );
     }
 
     return game;

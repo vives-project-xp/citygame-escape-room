@@ -1,7 +1,7 @@
 #include "Leds.h"
 
 Leds::Leds(I2C* i2c){
-    this->leds = new TLC59116(*i2c, this->address);
+    this->leds = new TLC59116(i2c, this->address);
     resetLeds();
 }
 

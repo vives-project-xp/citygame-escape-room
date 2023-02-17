@@ -1,7 +1,10 @@
 #include "LocationMission.h"
+#include "mbed_trace.h"
 #include <cfloat>
 
-LocationMission::LocationMission(std::string name, int id, std::string description, int typeId, Log::LoggerInterface * logger): Mission(name, id, description, typeId, logger){
+#define TRACE_GROUP "LOCATIONMISSION"
+
+LocationMission::LocationMission(std::string name, int id, std::string description, int typeId): Mission(name, id, description, typeId){
 }
 
 int LocationMission::getIndexOfClosestArea(){
@@ -18,9 +21,8 @@ int LocationMission::getIndexOfClosestArea(){
 }
 
 void LocationMission::debug(){
-    logger->debug("Target location: %5.6f , %5.6f", getLatitude(), getLongitude());
-    logger->debug("Radius: %f ", getRadius());
-    if(board->gps->fix) logger->debug("Distance to target: %f ", getDistanceToTarget());
+    tr_debug("Target location: %5.6f , %5.6f", getLatitude(), getLongitude());
+    tr_debug("Radius: %f ", getRadius());
 }
 
 bool LocationMission::isComplete(){

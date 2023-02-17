@@ -2,12 +2,11 @@
 
 #include "Mission.h"
 #include <string>
-#include "LinkedList.h"
+#include "LinkedList2.h"
 #include "LinkableNode.h"
 #include "Board.h"
-#include "logable.h"
 
-class Game : public LogItNow::Logable {
+class Game {
     private:
         std::string name;
         std::string box_description;
@@ -17,13 +16,13 @@ class Game : public LogItNow::Logable {
 
         bool complete;
 
-        Mission * currentMission;
-        LinkedList * linkedList;
-        LinkableNode * currentNode;
-        Board * board;
+        Mission* currentMission;
+        LinkedList2* linkedList;
+        LinkableNode* currentNode;
+        Board* board;
 
     public:
-        Game(Log::LoggerInterface * logger = 0);
+        Game();
 
     public:
         void run();

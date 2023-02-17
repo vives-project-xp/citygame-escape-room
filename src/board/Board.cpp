@@ -2,11 +2,9 @@
 #include "Lcd.h"
 #include "Display.h"
 
-Serial gps_serial(PTC17,PTC16);
 I2C i2c(PTE25, PTE24);
 
-Board::Board(Log::LoggerInterface * logger){
-   gps = new Gps(&gps_serial, logger);
+Board::Board(){
    leds = new Leds(&i2c);
    lcd = new Display();
    keys = new Keys();

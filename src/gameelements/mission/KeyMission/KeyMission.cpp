@@ -1,10 +1,13 @@
 #include "KeyMission.h"
+#include "mbed_trace.h"
 
-KeyMission::KeyMission(std::string name, int id, std::string description, int typeId, Log::LoggerInterface * logger): Mission(name, id, description, typeId, logger){
+#define TRACE_GROUP "KEYMISSION"
+
+KeyMission::KeyMission(std::string name, int id, std::string description, int typeId): Mission(name, id, description, typeId){
 }
 
 void KeyMission::debug(){
-    logger->debug("Key turned: %s", board->keys->isKeyTurned() ? "YES" : "NO");
+    tr_debug("Key turned: %s", board->keys->isKeyTurned() ? "YES" : "NO");
 }
 
 bool KeyMission::isComplete(){

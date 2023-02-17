@@ -20,6 +20,7 @@ double Location::getRadius(){
 }
 
 double Location::getDistanceToTarget(Board * board){
-    return board->gps->distance_to_target(latitude, longitude);
+    return 0.0;
+    // return board->gps->distance_to_target(latitude, longitude);
 }
 

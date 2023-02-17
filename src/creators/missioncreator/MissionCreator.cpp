@@ -3,7 +3,7 @@
 #include "LocationMission.h"
 #include "KeyMission.h"
 
-Mission* MissionCreator::createInstance(MbedJSONValue & json, Log::LoggerInterface * logger){
+Mission* MissionCreator::createInstance(MbedJSONValue & json){
 
         std::string name = json["name"].get<std::string>();
         int id = json["id"].get<int>();
@@ -12,7 +12,7 @@ Mission* MissionCreator::createInstance(MbedJSONValue & json, Log::LoggerInterfa
 
         switch(typeId){
             case 10: {
-                LocationMission * mission = new LocationMission(name, id, description, typeId, logger);
+                LocationMission * mission = new LocationMission(name, id, description, typeId);
                 for(int j=0; j < json["locations"].size(); j++){
                     mission->addTargetLocation(LocationCreator::createInstance( json["locations"][j]));
                 }
@@ -21,7 +21,7 @@ Mission* MissionCreator::createInstance(MbedJSONValue & json, Log::LoggerInterfa
             }
 
             case 20: {
-                return new KeyMission(name, id, description, typeId, logger);
+                return new KeyMission(name, id, description, typeId);
                 break;
             }
         }

@@ -2,11 +2,10 @@
 
 #include "Mission.h"
 #include "MbedJSONValue.h"
-#include "logable.h"
 
-class MissionCreator : public LogItNow::Logable{
+class MissionCreator {
 
     public:
-        static Mission * createInstance(MbedJSONValue & json, Log::LoggerInterface * logger = 0);
+        static Mission * createInstance(MbedJSONValue & json);
 
 };

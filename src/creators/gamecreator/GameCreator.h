@@ -1,9 +1,8 @@
 #pragma once
 
 #include "Game.h"
-#include "logable.h"
 
-class GameCreator : public LogItNow::Logable {
+class GameCreator {
     public:
-        static Game* createInstance(char * buffer, Log::LoggerInterface * logger = 0);
+        static Game* createInstance(char * buffer);
 };

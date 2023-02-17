@@ -1,8 +1,7 @@
 #include "Mission.h"
 #include <string>
 
-    Mission::Mission(std::string name, int id, std::string description, int typeId, Log::LoggerInterface * logger){
-        set_logger(logger);
+    Mission::Mission(std::string name, int id, std::string description, int typeId){
         this->name = name;
         this->id = id;
         this->description = description;

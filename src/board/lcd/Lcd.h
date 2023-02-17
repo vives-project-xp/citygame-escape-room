@@ -1,7 +1,7 @@
 #pragma once
 #include "TextLCD.h"
 #include <string>
-#include "DisplayX.h"
+#include "./DisplayX.h"
 
 
 class Lcd : public DisplayX{

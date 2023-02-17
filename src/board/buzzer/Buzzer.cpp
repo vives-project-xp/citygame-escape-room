@@ -12,7 +12,7 @@ void Buzzer::buttonBeep(){
 void Buzzer::playFreq(float frequency, float duration, float volume){
         pwm.period(1.0/frequency);
         pwm = volume/2.0;
-        wait_ms(duration);
+        ThisThread::sleep_for(std::chrono::milliseconds((int)duration));
         pwm = 0.0;
 }
 

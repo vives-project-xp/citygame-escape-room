@@ -1,9 +1,11 @@
 #include "Game.h"
 #include "mbed.h"
+#include "mbed_trace.h"
 
-Game::Game(Log::LoggerInterface * logger) {
-    set_logger(logger);
-    this->linkedList = new LinkedList();
+#define TRACE_GROUP "GAME"
+
+Game::Game() {
+    this->linkedList = new LinkedList2();
     currentMission = NULL;
     complete = false;
 }
@@ -14,11 +16,11 @@ void Game::run(){
 }
 
 void Game::debug(){
-    if(currentMission == NULL) logger->warning("No current mission");
+    if(currentMission == NULL) tr_warn("No current mission");
     else{
-      logger->debug("Mission Name: %s", currentMission->getName().c_str());
-      logger->debug("Mission ID: %i", currentMission->getId());
-      logger->debug("Mission Description: %s", currentMission->getDescription().c_str());
+      tr_debug("Mission Name: %s", currentMission->getName().c_str());
+      tr_debug("Mission ID: %i", currentMission->getId());
+      tr_debug("Mission Description: %s", currentMission->getDescription().c_str());
       currentMission->debug();
     }
 }
@@ -73,10 +75,9 @@ bool Game::isComplete(){
 }
 
 void Game::toLcd(){
-    this->board->lcd->setTime(this->board->gps->getHours() + 2, this->board->gps->getMinutes(), this->board->gps->getSeconds());
-    this->board->lcd->setStatusGps(this->board->gps->fix);
+    this->board->lcd->setTime(1,2,3);
+    this->board->lcd->setStatusGps(1);
     if(isComplete()) this->board->lcd->setMessageScreen("No missions available");
-    else if(!board->gps->fix) this->board->lcd->setMessageScreen("Waiting for GPS...");
     else{
         this->currentMission->toLcd();
     }

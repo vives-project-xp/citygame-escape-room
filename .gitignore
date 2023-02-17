@@ -2,9 +2,7 @@ mbed-settings.py
 mbed-settings.pyc
 mbed-os/
 .mbed
-Simple-LoRaWAN
 MbedJSONValue/
-LogIt/
 TLC59116/
 MBed_Adafruit-GPS-Library/
-LogItNow/
+__pycache__
