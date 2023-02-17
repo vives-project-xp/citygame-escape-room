@@ -26,7 +26,7 @@ void setup_game_handler(void) {
 }
 
 void createSetupThread(void) {
-  setupGameThread = new Thread(osPriorityNormal, 1024 *3);
+  setupGameThread = new Thread(osPriorityNormal, 1024 *20);
 
   setupGameThread->start(setup_game_handler);
   setupGameThread->join();   // Wait for completion
