@@ -15,7 +15,7 @@ Board::Board(){
    lcd->setStartScreen();
    buzzer->startupSound();
 
-   numberPad->attach(callback(this, &Board::buttonEvent));
+   numberPad->attach(mbed::Callback<void(uint32_t)>(this, &Board::buttonEvent));
    numberPad->start();
 }
 
