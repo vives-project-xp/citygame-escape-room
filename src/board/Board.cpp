@@ -15,13 +15,12 @@ Board::Board(){
    lcd->setStartScreen();
    buzzer->startupSound();
 
-   numberPad->attach(this, &Board::buttonEvent);
+   numberPad->attach(callback(this, &Board::buttonEvent));
    numberPad->start();
 }
 
-uint32_t Board::buttonEvent(uint32_t index){
+void Board::buttonEvent(uint32_t index){
     printf("Pushed button: %c",NumberPad::KEYS[index]);
     buzzer->keypadBeep(NumberPad::KEYS[index]);
     lcd->eventHandler(NumberPad::KEYS[index]);
-    return 0;
 }

@@ -18,7 +18,7 @@ class Board{
 
     public:
         Board();
-        uint32_t buttonEvent(uint32_t index);
+        void buttonEvent(uint32_t index);
 
 
 };
