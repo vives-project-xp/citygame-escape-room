@@ -2,6 +2,7 @@
 
 #include "Board.h"
 #include "Game.h"
+#include "mbed_events.h"
 
 class GameHandler {
     private:
@@ -9,13 +10,14 @@ class GameHandler {
 
         Board * board;
         bool gameRunning;
-        Thread lcd_thread;
+
+        EventQueue* queue;
 
     public:
         Game * game;
 
     public:
-        GameHandler(char * buffer, Board * board);
+        GameHandler(char * buffer, Board * board, EventQueue* queue);
         void run();
         void toLcd();
 };

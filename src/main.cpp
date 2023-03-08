@@ -3,12 +3,12 @@
 #include "StringReader.h"
 #include "GameHandler.h"
 #include "mbed_trace.h"
+#include "mbed_events.h"
 
 #define TRACE_GROUP "MAIN"
 
 BufferedSerial pc(USBTX, USBRX, 115200);
-Thread send_thread;
-Thread * setupGameThread;
+EventQueue queue;
 
 Board* board;
 GameHandler* gameHandler;
@@ -22,16 +22,7 @@ void setup_game_handler(void) {
   reader->read(buffer, sizeof(buffer));
   printf("\n Content: --------------------------- \n %s \n ------------------------------------------- \n", buffer);
 
-  gameHandler = new GameHandler(buffer, board);
-}
-
-void createSetupThread(void) {
-  setupGameThread = new Thread(osPriorityNormal, 1024 *20);
-
-  setupGameThread->start(setup_game_handler);
-  setupGameThread->join();   // Wait for completion
-
-  delete setupGameThread;
+  gameHandler = new GameHandler(buffer, board, &queue);
 }
 
 void init()
@@ -41,7 +32,7 @@ void init()
 
     board = new Board();
 
-    createSetupThread();
+    setup_game_handler();
 }
 
 int main(void)
