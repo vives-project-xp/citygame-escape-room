@@ -2,11 +2,12 @@
 
 #include "mbed.h"
 #include "Keypad.h"
+#include "mbed_events.h"
 
 class NumberPad : public Keypad{
 
     public:
-        NumberPad();
+        NumberPad(EventQueue* queue);
 
     public:
         void runThisMethod(int index);

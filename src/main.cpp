@@ -30,7 +30,7 @@ void init()
     mbed_trace_init();
     tr_info("Initializing Vives CityGame");
 
-    board = new Board();
+    board = new Board(&queue);
 
     setup_game_handler();
 }
@@ -42,5 +42,6 @@ int main(void)
 
     while(true){
         gameHandler->run();
+        queue.dispatch_once();
     }
 }
