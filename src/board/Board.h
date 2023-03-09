@@ -5,6 +5,7 @@
 #include "Keys.h"
 #include "Buzzer.h"
 #include "NumberPad.h"
+#include "mbed_events.h"
 
 
 class Board{
@@ -17,8 +18,8 @@ class Board{
         NumberPad * numberPad;
 
     public:
-        Board();
-        uint32_t buttonEvent(uint32_t index);
+        Board(EventQueue* queue);
+        void buttonEvent(uint32_t index);
 
 
 };
