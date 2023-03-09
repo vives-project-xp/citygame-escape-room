@@ -6,3 +6,5 @@ MbedJSONValue/
 TLC59116/
 MBed_Adafruit-GPS-Library/
 __pycache__
+citygame-keypad/
+citygame-displaydriver/
